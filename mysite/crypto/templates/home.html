@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<table class="table table-bordered table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">USD</th>
+      <th scope="col">PKR</th>
+      <th scope="col">24H High USD</th>
+      <th scope="col">24H Low USD</th>
+      <th scope="col">24H High PKR</th>
+      <th scope="col">24H Low PKR</th>
+    </tr>
+  </thead>
+
+{% for key,value in price.DISPLAY.items %}
+  <tbody>
+    <tr> 
+      <td>{{ key }}</td>
+      <td>{{ value.USD.PRICE }}</td>
+      <td>{{ value.PKR.PRICE }}</td>
+      <td>{{ value.USD.HIGHDAY }}</td>
+      <td>{{ value.USD.LOWDAY }}</td>
+      <td>{{ value.PKR.HIGHDAY }}</td>
+      <td>{{ value.PKR.LOWDAY }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br>
+<br>
+<div clsss='container'>
+	<div class='row'>
+		{% for x in api.Data %}
+		<div class="col-sm">
+			<div class="card" style="width: 18rem;">
+			  	<img src="{{ x.imageurl }}" class="card-img-top" alt="{{ x.source }}">
+			  	<div class="card-body d-flex flex-column">
+			    	<h5 class="card-title">{{ x.title }}</h5>
+			    	<p class="card-text">{{ x.body }}</p>
+			    	<a href="{{ x.url }}" class="btn btn-danger">Read more</a>
+	  			</div>
+			</div>
+			<br>
+		</div>
+		{% endfor %}		
+	</div>
+</div>
+	
+{% endblock %}
